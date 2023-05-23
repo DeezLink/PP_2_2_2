@@ -15,10 +15,10 @@
         <th>Цвет</th>
         <th>Год выпуска</th>
     </tr>
-    <tr th:each="msg : ${list}">
-        <td th:text="${msg.getModel()}">car</td>
-        <td th:text="${msg.getColor()}">car</td>
-        <td th:text="${msg.getAge()}">car</td>
+    <tr th:each="car : ${carCount}">
+        <td th:text="${car.getModel()}">car</td>
+        <td th:text="${car.getColor()}">car</td>
+        <td th:text="${car.getAge()}">car</td>
     </tr>
 
 </table>
