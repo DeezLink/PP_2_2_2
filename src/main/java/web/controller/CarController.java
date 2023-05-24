@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.service.CarService;
 import web.service.CarServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cars")
@@ -19,11 +21,11 @@ public class CarController {
         this.carService = carService;
     }
     @GetMapping
-    public String getCarCount(HttpServletRequest request, Model model) {
-        if (request.getParameter("count")==null) {
+    public String getCarCount(@RequestParam(value = "count") Optional<Integer> count, Model model) {
+        if (count == null) {
             model.addAttribute("carCount", carService.getCars());
         } else {
-            model.addAttribute("carCount", carService.getCarCount(Integer.parseInt(request.getParameter("count"))));
+            model.addAttribute("carCount", carService.getCarCount(count.orElse(0)));
         }
         return "cars";
     }
